@@ -1,0 +1,545 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="ART is a tool for orgnazing, displaying, and editing automation test results.">
+    <meta name="author" content="Corbett Weinberg">
+    <link rel="icon" href="../../favicon.ico">
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <!--<link href="/css/main.css" rel="stylesheet">-->
+        <title>Automation Reporting Tool</title>
+  </head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">HBS Automation Reporting Tool</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-3 col-md-2 sidebar"><ul class="nav nav-sidebar"><li><a href="/">Overview</a></li><li><a href="smoke">Smoke Tests</a></li><li><a href="integration">Integration Tests</a></li><li><a href="regression">Regression Tests</a></li></ul><ul class="nav nav-sidebar"><li><a href="partner">Partner</a></li><li><a href="mba">MBA</a></li><li><a href="doc">Doctoral</a></li><li><a href="ee">Executive Education</a></li><li><a href="er">External Relations</a></li><li><a href="finance">Finance</a></li><li><a href="ops">Operations</a></li></ul><ul class="nav nav-sidebar"><li><a href="infrastructure">Infrastructure</a></li><li><a href="access">Access</a></li><li><a href="security">Security</a></li></ul></div>    <!---->
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-4 placeholder">
+              <div id="chart-div"> 
+                    
+<script type="text/javascript" src="//www.google.com/jsapi"></script><script type="text/javascript">window.lava = (function() {
+  this.get              = null;
+  this.event            = null;
+  this.loadData         = null;
+  this.register         = null;
+  this.getLavachart     = null;
+  this.charts           = {};
+  this.registeredCharts = [];
+
+  this.Chart = function() {
+    this.init    = null;
+    this.redraw  = null;
+    this.setData = null;
+    this.data    = null;
+    this.chart   = null;
+    this.options = null;
+    this.formats = [];
+  };
+
+  this.get = function (chartLabel, callback) {
+    if (arguments.length < 2 || typeof chartLabel !== 'string' || typeof callback !== 'function') {
+      throw new Error('[Lavacharts] The syntax for lava.get must be (str ChartLabel, fn Callback)');
+    }
+
+    lava.getLavachart(chartLabel, function (lavachart) {
+      return callback(lavachart.chart);
+    });
+  };
+
+  this.loadData = function (chartLabel, dataTableJson, callback) {
+    lava.getLavachart(chartLabel, function (lavachart) {
+      lavachart.setData(dataTableJson);
+      lavachart.redraw();
+
+      if (typeof callback == "function") {
+        return callback(lavachart.chart);
+      } else {
+        return true;
+      }
+    });
+  };
+
+  this.event = function (event, chart, callback) {
+    return callback(event, chart);
+  };
+
+  this.register = function(type, label) {
+    this.registeredCharts.push(type + ':' + label);
+  };
+
+  this.getLavachart = function (chartLabel, callback) {
+    var chartTypes = Object.keys(lava.charts);
+    var chart;
+
+    var search = chartTypes.some(function (e) {
+      if (typeof lava.charts[e][chartLabel] !== 'undefined') {
+        chart = lava.charts[e][chartLabel];
+
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    if (search === false) {
+      throw new Error('[Lavacharts] Chart "' + chartLabel + '" was not found');
+    } else {
+      callback(chart);
+    }
+  };
+
+  this.redrawCharts = function() {
+    var timer, delay = 300;
+
+    clearTimeout(timer);
+
+    timer = setTimeout(function() {
+      for(var c = 0; c < lava.registeredCharts.length; c++) {
+        var parts = lava.registeredCharts[c].split(':');
+
+        lava.charts[parts[0]][parts[1]].chart.draw(
+          lava.charts[parts[0]][parts[1]].data,
+          lava.charts[parts[0]][parts[1]].options
+        );
+      }
+    }, delay);
+  };
+
+  return this;
+})();
+
+window.addEventListener("resize", window.lava.redrawCharts);
+</script><script type="text/javascript">
+if ( typeof lava.charts.PieChart == "undefined" ) { lava.charts.PieChart = {}; }
+
+lava.charts.PieChart["SmokeTestChart"] = new lava.Chart;
+
+if (!document.getElementById("chart-div")){console.error("[Lavacharts] No matching element was found with ID \"chart-div\"");}
+
+lava.charts.PieChart["SmokeTestChart"].init = function() {
+var $this = lava.charts.PieChart["SmokeTestChart"];
+
+$this.data = new google.visualization.DataTable({"cols":[{"type":"string","label":"TestResults"},{"type":"number","label":"Percent"}],"rows":[{"c":[{"v":"Passed"},{"v":99.55}]},{"c":[{"v":"Failed"},{"v":29.45}]},{"c":[{"v":"Skipped"},{"v":20}]}]}, 0.6);
+$this.options = {"legend":{"position":"none"},"chartArea":{"width":250,"height":250},"colors":["078B3E","CD1E35","FCDC27"],"is3D":true};
+
+$this.chart = new google.visualization.PieChart(document.getElementById("chart-div"));
+
+$this.chart.draw($this.data, $this.options);
+};
+
+lava.charts.PieChart["SmokeTestChart"].setData = function (data) {    var $this = lava.charts.PieChart["SmokeTestChart"];
+$this.data = new google.visualization.DataTable(data, 0.6);
+};
+
+lava.charts.PieChart["SmokeTestChart"].redraw = function () {    var $this = lava.charts.PieChart["SmokeTestChart"];    $this.chart.draw($this.data, $this.options);};
+google.load('visualization', '1', {'packages':['corechart'], callback: lava.charts.PieChart['SmokeTestChart'].init});
+lava.register("PieChart", "SmokeTestChart");
+
+</script>
+
+              </div>
+              <h4>Smoke Tests</h4>
+            </div>
+            <div class="col-xs-6 col-sm-4 placeholder">
+              <div id="chart2-div"> 
+                    
+<script type="text/javascript">
+if ( typeof lava.charts.PieChart == "undefined" ) { lava.charts.PieChart = {}; }
+
+lava.charts.PieChart["IntegrationTestChart"] = new lava.Chart;
+
+if (!document.getElementById("chart2-div")){console.error("[Lavacharts] No matching element was found with ID \"chart2-div\"");}
+
+lava.charts.PieChart["IntegrationTestChart"].init = function() {
+var $this = lava.charts.PieChart["IntegrationTestChart"];
+
+$this.data = new google.visualization.DataTable({"cols":[{"type":"string","label":"TestResults"},{"type":"number","label":"Percent"}],"rows":[{"c":[{"v":"Passed"},{"v":90}]},{"c":[{"v":"Failed"},{"v":5}]},{"c":[{"v":"Skipped"},{"v":5}]}]}, 0.6);
+$this.options = {"legend":{"position":"none"},"chartArea":{"width":250,"height":250},"colors":["078B3E","CD1E35","FCDC27"],"is3D":true};
+
+$this.chart = new google.visualization.PieChart(document.getElementById("chart2-div"));
+
+$this.chart.draw($this.data, $this.options);
+};
+
+lava.charts.PieChart["IntegrationTestChart"].setData = function (data) {    var $this = lava.charts.PieChart["IntegrationTestChart"];
+$this.data = new google.visualization.DataTable(data, 0.6);
+};
+
+lava.charts.PieChart["IntegrationTestChart"].redraw = function () {    var $this = lava.charts.PieChart["IntegrationTestChart"];    $this.chart.draw($this.data, $this.options);};
+google.load('visualization', '1', {'packages':['corechart'], callback: lava.charts.PieChart['IntegrationTestChart'].init});
+lava.register("PieChart", "IntegrationTestChart");
+
+</script>
+
+              </div>
+              <h4>Integration Tests</h4>
+            </div>
+            <div class="col-xs-6 col-sm-4 placeholder">
+              <div id="chart3-div"> 
+                    
+<script type="text/javascript">
+if ( typeof lava.charts.PieChart == "undefined" ) { lava.charts.PieChart = {}; }
+
+lava.charts.PieChart["RegressionTestChart"] = new lava.Chart;
+
+if (!document.getElementById("chart3-div")){console.error("[Lavacharts] No matching element was found with ID \"chart3-div\"");}
+
+lava.charts.PieChart["RegressionTestChart"].init = function() {
+var $this = lava.charts.PieChart["RegressionTestChart"];
+
+$this.data = new google.visualization.DataTable({"cols":[{"type":"string","label":"TestTesults"},{"type":"number","label":"Percent"}],"rows":[{"c":[{"v":"Passed"},{"v":82}]},{"c":[{"v":"Failed"},{"v":18}]},{"c":[{"v":"Skipped"},{"v":20}]}]}, 0.6);
+$this.options = {"legend":{"position":"none"},"chartArea":{"width":250,"height":250},"colors":["078B3E","CD1E35","FCDC27"],"is3D":true};
+
+$this.chart = new google.visualization.PieChart(document.getElementById("chart3-div"));
+
+$this.chart.draw($this.data, $this.options);
+};
+
+lava.charts.PieChart["RegressionTestChart"].setData = function (data) {    var $this = lava.charts.PieChart["RegressionTestChart"];
+$this.data = new google.visualization.DataTable(data, 0.6);
+};
+
+lava.charts.PieChart["RegressionTestChart"].redraw = function () {    var $this = lava.charts.PieChart["RegressionTestChart"];    $this.chart.draw($this.data, $this.options);};
+google.load('visualization', '1', {'packages':['corechart'], callback: lava.charts.PieChart['RegressionTestChart'].init});
+lava.register("PieChart", "RegressionTestChart");
+
+</script>
+
+              </div>
+              <h4>Regression Tests</h4>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Run #</th>
+                  <th>Description</th>
+                  <th>Test Cases</th>
+                  <th>Pass</th>
+                  <th>Fail</th>
+                  <th>Skipped</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+                                          
+          
+                      
+                              
+          
+                      
+                              
+          
+                      
+                              
+          
+                      
+                                    
+          <tr>
+              <td>11</td>
+              <td>Quick Codes Smoke Tests</td>
+              <td>4</td>
+              
+                            <td>4</td>
+              
+                            <td>-</td>
+                            
+                            <td>-</td>
+              
+          </tr>
+                                        
+          
+                      
+                              
+          
+                      
+                              
+          
+                      
+                              
+          
+                      
+                                    
+          <tr>
+              <td>10</td>
+              <td>Quick Codes Smoke Tests</td>
+              <td>4</td>
+              
+                            <td>4</td>
+              
+                            <td>-</td>
+                            
+                            <td>-</td>
+              
+          </tr>
+                                        
+          
+                      
+                              
+          
+                      
+                              
+          
+                      
+                              
+          
+                      
+                                    
+          <tr>
+              <td>9</td>
+              <td>Quick Codes Smoke Tests</td>
+              <td>4</td>
+              
+                            <td>4</td>
+              
+                            <td>-</td>
+                            
+                            <td>-</td>
+              
+          </tr>
+                                        
+          
+                      
+                              
+          
+                      
+                              
+          
+                      
+                              
+          
+                      
+                                    
+          <tr>
+              <td>8</td>
+              <td>Quick Codes Smoke Tests</td>
+              <td>4</td>
+              
+                            <td>4</td>
+              
+                            <td>-</td>
+                            
+                            <td>-</td>
+              
+          </tr>
+                                        
+          
+                      
+                                    
+          <tr>
+              <td>7</td>
+              <td>Atlas Smoke Tests</td>
+              <td>1</td>
+              
+                            <td>1</td>
+              
+                            <td>-</td>
+                            
+                            <td>-</td>
+              
+          </tr>
+                                        
+          
+                      
+                                    
+          <tr>
+              <td>6</td>
+              <td>Atlas Smoke Tests</td>
+              <td>1</td>
+              
+                            <td>1</td>
+              
+                            <td>-</td>
+                            
+                            <td>-</td>
+              
+          </tr>
+                                        
+          
+                      
+                                    
+          <tr>
+              <td>5</td>
+              <td>Atlas Smoke Tests</td>
+              <td>1</td>
+              
+                            <td>1</td>
+              
+                            <td>-</td>
+                            
+                            <td>-</td>
+              
+          </tr>
+                                        
+          
+                      
+                              
+          
+                      
+                              
+          
+                                
+                                    
+          <tr>
+              <td>4</td>
+              <td>Doctoral Grades Smoke Tests</td>
+              <td>3</td>
+              
+                            <td>2</td>
+              
+                            <td>1</td>
+                            
+                            <td>-</td>
+              
+          </tr>
+                                        
+          
+                                
+                              
+          
+                                
+                              
+          
+                                
+                              
+          
+                                
+                              
+          
+                                
+                              
+          
+                                
+                                    
+          <tr>
+              <td>3</td>
+              <td>MBA Grades Smoke Tests</td>
+              <td>6</td>
+              
+                            <td>-</td>
+              
+                            <td>3</td>
+                            
+                            <td>3</td>
+              
+          </tr>
+                                        
+          
+                      
+                              
+          
+                                
+                              
+          
+                                
+                              
+          
+                                
+                              
+          
+                                
+                              
+          
+                                
+                                    
+          <tr>
+              <td>2</td>
+              <td>MBA Grades Smoke Tests</td>
+              <td>6</td>
+              
+                            <td>1</td>
+              
+                            <td>2</td>
+                            
+                            <td>3</td>
+              
+          </tr>
+                                        
+          
+                      
+                              
+          
+                                
+                              
+          
+                                
+                              
+          
+                                
+                              
+          
+                                
+                              
+          
+                                
+                                    
+          <tr>
+              <td>1</td>
+              <td>MBA Grades Smoke Tests</td>
+              <td>6</td>
+              
+                            <td>1</td>
+              
+                            <td>3</td>
+                            
+                            <td>2</td>
+              
+          </tr>
+        
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
+
+</body>
+</html>
